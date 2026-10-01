@@ -1,0 +1,14 @@
+﻿  Determining projects to restore...
+  Restored C:\Users\Alin world\Desktop\sarohubPOS\src\SaroHub.Domain\SaroHub.Domain.csproj (in 16.32 sec).
+  Restored C:\Users\Alin world\Desktop\sarohubPOS\src\SaroHub.Core\SaroHub.Core.csproj (in 17.51 sec).
+  Restored C:\Users\Alin world\Desktop\sarohubPOS\src\SaroHub.Infrastructure\SaroHub.Infrastructure.csproj (in 45.79 sec).
+  Restored C:\Users\Alin world\Desktop\sarohubPOS\src\SaroHub.Desktop\SaroHub.Desktop.csproj (in 1.26 min).
+CSC : error CS2012: Cannot open 'C:\Users\Alin world\Desktop\sarohubPOS\src\SaroHub.Domain\obj\Debug\net8.0\SaroHub.Domain.dll' for writing -- The process cannot access the file 'C:\Users\Alin world\Desktop\sarohubPOS\src\SaroHub.Domain\obj\Debug\net8.0\SaroHub.Domain.dll' because it is being used by another process.; file may be locked by 'VBCSCompiler' (22664) [C:\Users\Alin world\Desktop\sarohubPOS\src\SaroHub.Domain\SaroHub.Domain.csproj]
+
+Build FAILED.
+
+CSC : error CS2012: Cannot open 'C:\Users\Alin world\Desktop\sarohubPOS\src\SaroHub.Domain\obj\Debug\net8.0\SaroHub.Domain.dll' for writing -- The process cannot access the file 'C:\Users\Alin world\Desktop\sarohubPOS\src\SaroHub.Domain\obj\Debug\net8.0\SaroHub.Domain.dll' because it is being used by another process.; file may be locked by 'VBCSCompiler' (22664) [C:\Users\Alin world\Desktop\sarohubPOS\src\SaroHub.Domain\SaroHub.Domain.csproj]
+    0 Warning(s)
+    1 Error(s)
+
+Time Elapsed 00:02:05.23

@@ -1,0 +1,32 @@
+<!-- src/SaroHub.Desktop/SaroHub.Desktop.csproj -->
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>SaroHub.Desktop</RootNamespace>
+    <AssemblyName>SaroHubPOS</AssemblyName>
+    <ApplicationIcon>Resources\app.ico</ApplicationIcon>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm"                         Version="8.3.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection"       Version="8.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite"           Version="8.0.8" />
+    <PackageReference Include="LiveChartsCore.SkiaSharpView.WPF"               Version="2.0.0-rc3" />
+    <PackageReference Include="QuestPDF"                                        Version="2024.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SaroHub.Core\SaroHub.Core.csproj" />
+    <ProjectReference Include="..\SaroHub.Domain\SaroHub.Domain.csproj" />
+    <ProjectReference Include="..\SaroHub.Infrastructure\SaroHub.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <!-- Ensure icon is embedded as a WPF assembly Resource -->
+  <ItemGroup>
+    <Resource Include="Resources\app.ico" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,34 @@
+<UserControl x:Class="SaroHub.Desktop.Views.QuotationsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{StaticResource BackgroundBrush}">
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <DockPanel Grid.Row="0" Margin="0 0 0 20">
+            <Button DockPanel.Dock="Right" Content="🔄 Refresh" Command="{Binding RefreshCommand}" Style="{StaticResource BtnSecondary}" Width="100"/>
+            <StackPanel>
+                <TextBlock Text="Customer Quotations &amp; Estimates" FontSize="22" FontWeight="Bold" Foreground="{StaticResource PrimaryBrush}"/>
+                <TextBlock Text="Create, print, send via WhatsApp, and convert estimates to sales" FontSize="13" Foreground="{StaticResource MutedBrush}" Margin="0 2 0 0"/>
+            </StackPanel>
+        </DockPanel>
+
+        <!-- Quotations Grid -->
+        <Border Grid.Row="1" Style="{StaticResource Card}">
+            <DataGrid ItemsSource="{Binding Quotations}" AutoGenerateColumns="False" IsReadOnly="True" Style="{StaticResource CleanGrid}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Quotation #" Binding="{Binding QuotationNo}" Width="130"/>
+                    <DataGridTextColumn Header="Customer" Binding="{Binding CustomerName}" Width="*"/>
+                    <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="120"/>
+                    <DataGridTextColumn Header="Expiry Date" Binding="{Binding ExpiryDate}" Width="120"/>
+                    <DataGridTextColumn Header="Total Amount" Binding="{Binding Total}" Width="140"/>
+                    <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="100"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+    </Grid>
+</UserControl>

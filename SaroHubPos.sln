@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaroHub.Domain", "src\SaroHub.Domain\SaroHub.Domain.csproj", "{C70BDFF6-783B-4559-886F-91A7DA2E7315}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaroHub.Core", "src\SaroHub.Core\SaroHub.Core.csproj", "{29107F94-1BB0-4AC7-9F22-C09D230BD603}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaroHub.Infrastructure", "src\SaroHub.Infrastructure\SaroHub.Infrastructure.csproj", "{280635F7-C5DC-446F-9801-11D9FF293A00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaroHub.Desktop", "src\SaroHub.Desktop\SaroHub.Desktop.csproj", "{75971CAE-AED0-4481-87DD-A55B0B74BB49}"
+EndProject
+Global
+    GlobalSection(SolutionConfigurationPlatforms) = preSolution
+        Debug|Any CPU = Debug|Any CPU
+        Release|Any CPU = Release|Any CPU
+    EndGlobalSection
+    GlobalSection(ProjectConfigurationPlatforms) = postSolution
+        {C70BDFF6-783B-4559-886F-91A7DA2E7315}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+        {C70BDFF6-783B-4559-886F-91A7DA2E7315}.Debug|Any CPU.Build.0 = Debug|Any CPU
+        {C70BDFF6-783B-4559-886F-91A7DA2E7315}.Release|Any CPU.ActiveCfg = Release|Any CPU
+        {C70BDFF6-783B-4559-886F-91A7DA2E7315}.Release|Any CPU.Build.0 = Release|Any CPU
+        {29107F94-1BB0-4AC7-9F22-C09D230BD603}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+        {29107F94-1BB0-4AC7-9F22-C09D230BD603}.Debug|Any CPU.Build.0 = Debug|Any CPU
+        {29107F94-1BB0-4AC7-9F22-C09D230BD603}.Release|Any CPU.ActiveCfg = Release|Any CPU
+        {29107F94-1BB0-4AC7-9F22-C09D230BD603}.Release|Any CPU.Build.0 = Release|Any CPU
+        {280635F7-C5DC-446F-9801-11D9FF293A00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+        {280635F7-C5DC-446F-9801-11D9FF293A00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+        {280635F7-C5DC-446F-9801-11D9FF293A00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+        {280635F7-C5DC-446F-9801-11D9FF293A00}.Release|Any CPU.Build.0 = Release|Any CPU
+        {75971CAE-AED0-4481-87DD-A55B0B74BB49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+        {75971CAE-AED0-4481-87DD-A55B0B74BB49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+        {75971CAE-AED0-4481-87DD-A55B0B74BB49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+        {75971CAE-AED0-4481-87DD-A55B0B74BB49}.Release|Any CPU.Build.0 = Release|Any CPU
+    EndGlobalSection
+EndGlobal

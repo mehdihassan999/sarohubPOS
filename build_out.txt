@@ -1,0 +1,20 @@
+  Determining projects to restore...
+  Restored C:\Users\Alin world\Desktop\sarohubPOS\src\SaroHub.Desktop\SaroHub.Desktop.csproj (in 7.26 sec).
+  3 of 4 projects are up-to-date for restore.
+C:\Program Files\dotnet\sdk\10.0.401\Microsoft.Common.CurrentVersion.targets(4919,5): warning MSB3026: Could not copy "obj\Debug\net8.0\SaroHub.Domain.dll" to "bin\Debug\net8.0\SaroHub.Domain.dll". Beginning retry 1 in 1000ms. The process cannot access the file 'C:\Users\Alin world\Desktop\sarohubPOS\src\SaroHub.Domain\bin\Debug\net8.0\SaroHub.Domain.dll' because it is being used by another process.  [C:\Users\Alin world\Desktop\sarohubPOS\src\SaroHub.Domain\SaroHub.Domain.csproj]
+  SaroHub.Domain -> C:\Users\Alin world\Desktop\sarohubPOS\src\SaroHub.Domain\bin\Debug\net8.0\SaroHub.Domain.dll
+  SaroHub.Core -> C:\Users\Alin world\Desktop\sarohubPOS\src\SaroHub.Core\bin\Debug\net8.0\SaroHub.Core.dll
+C:\Users\Alin world\Desktop\sarohubPOS\src\SaroHub.Infrastructure\Persistence\DatabaseInitializer.cs(157,25): error CS1513: } expected [C:\Users\Alin world\Desktop\sarohubPOS\src\SaroHub.Infrastructure\SaroHub.Infrastructure.csproj]
+C:\Users\Alin world\Desktop\sarohubPOS\src\SaroHub.Infrastructure\Persistence\DatabaseInitializer.cs(157,25): error CS1026: ) expected [C:\Users\Alin world\Desktop\sarohubPOS\src\SaroHub.Infrastructure\SaroHub.Infrastructure.csproj]
+C:\Users\Alin world\Desktop\sarohubPOS\src\SaroHub.Infrastructure\Persistence\DatabaseInitializer.cs(157,25): error CS1002: ; expected [C:\Users\Alin world\Desktop\sarohubPOS\src\SaroHub.Infrastructure\SaroHub.Infrastructure.csproj]
+
+Build FAILED.
+
+C:\Program Files\dotnet\sdk\10.0.401\Microsoft.Common.CurrentVersion.targets(4919,5): warning MSB3026: Could not copy "obj\Debug\net8.0\SaroHub.Domain.dll" to "bin\Debug\net8.0\SaroHub.Domain.dll". Beginning retry 1 in 1000ms. The process cannot access the file 'C:\Users\Alin world\Desktop\sarohubPOS\src\SaroHub.Domain\bin\Debug\net8.0\SaroHub.Domain.dll' because it is being used by another process.  [C:\Users\Alin world\Desktop\sarohubPOS\src\SaroHub.Domain\SaroHub.Domain.csproj]
+C:\Users\Alin world\Desktop\sarohubPOS\src\SaroHub.Infrastructure\Persistence\DatabaseInitializer.cs(157,25): error CS1513: } expected [C:\Users\Alin world\Desktop\sarohubPOS\src\SaroHub.Infrastructure\SaroHub.Infrastructure.csproj]
+C:\Users\Alin world\Desktop\sarohubPOS\src\SaroHub.Infrastructure\Persistence\DatabaseInitializer.cs(157,25): error CS1026: ) expected [C:\Users\Alin world\Desktop\sarohubPOS\src\SaroHub.Infrastructure\SaroHub.Infrastructure.csproj]
+C:\Users\Alin world\Desktop\sarohubPOS\src\SaroHub.Infrastructure\Persistence\DatabaseInitializer.cs(157,25): error CS1002: ; expected [C:\Users\Alin world\Desktop\sarohubPOS\src\SaroHub.Infrastructure\SaroHub.Infrastructure.csproj]
+    1 Warning(s)
+    3 Error(s)
+
+Time Elapsed 00:01:37.76

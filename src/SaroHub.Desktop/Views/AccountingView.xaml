@@ -1,0 +1,95 @@
+<UserControl x:Class="SaroHub.Desktop.Views.AccountingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{StaticResource BackgroundBrush}">
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <DockPanel Grid.Row="0" Margin="0 0 0 20">
+            <Button DockPanel.Dock="Right" Content="🔄 Refresh" Command="{Binding RefreshCommand}" Style="{StaticResource BtnSecondary}" Width="100"/>
+            <StackPanel>
+                <TextBlock Text="General Ledger &amp; Chart of Accounts" FontSize="22" FontWeight="Bold" Foreground="{StaticResource PrimaryBrush}"/>
+                <TextBlock Text="Professional Double-Entry Bookkeeping System" FontSize="13" Foreground="{StaticResource MutedBrush}" Margin="0 2 0 0"/>
+            </StackPanel>
+        </DockPanel>
+
+        <!-- Financial Summary Cards -->
+        <UniformGrid Grid.Row="1" Columns="5" Margin="0 0 0 20">
+            <Border Style="{StaticResource MetricCard}">
+                <StackPanel>
+                    <TextBlock Text="Total Assets" Style="{StaticResource MetricLabel}"/>
+                    <TextBlock Text="{Binding TotalAssetsFmt}" Style="{StaticResource MetricValue}"/>
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource MetricCard}">
+                <StackPanel>
+                    <TextBlock Text="Total Liabilities" Style="{StaticResource MetricLabel}"/>
+                    <TextBlock Text="{Binding TotalLiabilitiesFmt}" Style="{StaticResource MetricValue}" Foreground="#DC2626"/>
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource MetricCard}">
+                <StackPanel>
+                    <TextBlock Text="Owner Equity" Style="{StaticResource MetricLabel}"/>
+                    <TextBlock Text="{Binding TotalEquityFmt}" Style="{StaticResource MetricValue}"/>
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource MetricCard}">
+                <StackPanel>
+                    <TextBlock Text="Total Revenue" Style="{StaticResource MetricLabel}"/>
+                    <TextBlock Text="{Binding TotalRevenueFmt}" Style="{StaticResource MetricValue}" Foreground="#16A34A"/>
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource MetricCard}">
+                <StackPanel>
+                    <TextBlock Text="Total Expenses" Style="{StaticResource MetricLabel}"/>
+                    <TextBlock Text="{Binding TotalExpenseFmt}" Style="{StaticResource MetricValue}"/>
+                </StackPanel>
+            </Border>
+        </UniformGrid>
+
+        <!-- Tabs / Main Content Grid -->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="16"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Chart of Accounts -->
+            <Border Grid.Column="0" Style="{StaticResource Card}">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" Text="Chart of Accounts" FontSize="16" FontWeight="SemiBold" Margin="0 0 0 12"/>
+                    <DataGrid ItemsSource="{Binding Accounts}" AutoGenerateColumns="False" IsReadOnly="True" Style="{StaticResource CleanGrid}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Code" Binding="{Binding Code}" Width="80"/>
+                            <DataGridTextColumn Header="Account Name" Binding="{Binding Name}" Width="*"/>
+                            <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="100"/>
+                            <DataGridTextColumn Header="Balance" Binding="{Binding Balance}" Width="120"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+            </Border>
+
+            <!-- Recent Journal Entries -->
+            <Border Grid.Column="2" Style="{StaticResource Card}">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" Text="Recent Journal Entries" FontSize="16" FontWeight="SemiBold" Margin="0 0 0 12"/>
+                    <DataGrid ItemsSource="{Binding RecentEntries}" AutoGenerateColumns="False" IsReadOnly="True" Style="{StaticResource CleanGrid}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Entry #" Binding="{Binding EntryNo}" Width="90"/>
+                            <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="120"/>
+                            <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*"/>
+                            <DataGridTextColumn Header="Debit" Binding="{Binding Debit}" Width="90"/>
+                            <DataGridTextColumn Header="Credit" Binding="{Binding Credit}" Width="90"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

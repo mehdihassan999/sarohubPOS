@@ -1,0 +1,41 @@
+<UserControl x:Class="SaroHub.Desktop.Views.WarrantyView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{StaticResource BackgroundBrush}">
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Margin="0 0 0 20">
+            <TextBlock Text="Warranty &amp; Serial Number Tracking" FontSize="22" FontWeight="Bold" Foreground="{StaticResource PrimaryBrush}"/>
+            <TextBlock Text="Search by serial number, product name, invoice #, or customer name" FontSize="13" Foreground="{StaticResource MutedBrush}" Margin="0 2 0 0"/>
+        </StackPanel>
+
+        <!-- Search Box -->
+        <Border Grid.Row="1" Style="{StaticResource Card}" Margin="0 0 0 16" Padding="16 12">
+            <DockPanel>
+                <Button DockPanel.Dock="Right" Content="🔍 Search" Command="{Binding SearchCommand}" Style="{StaticResource BtnPrimary}" Width="110"/>
+                <TextBox Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ModernInput}" VerticalAlignment="Center" Margin="0 0 12 0"/>
+            </DockPanel>
+        </Border>
+
+        <!-- Warranty Records Grid -->
+        <Border Grid.Row="2" Style="{StaticResource Card}">
+            <DataGrid ItemsSource="{Binding Records}" AutoGenerateColumns="False" IsReadOnly="True" Style="{StaticResource CleanGrid}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Serial Number" Binding="{Binding SerialNumber}" Width="140"/>
+                    <DataGridTextColumn Header="Product Name" Binding="{Binding ProductName}" Width="*"/>
+                    <DataGridTextColumn Header="Customer" Binding="{Binding CustomerName}" Width="160"/>
+                    <DataGridTextColumn Header="Invoice #" Binding="{Binding InvoiceNo}" Width="110"/>
+                    <DataGridTextColumn Header="Purchase Date" Binding="{Binding PurchaseDate}" Width="120"/>
+                    <DataGridTextColumn Header="Expiry Date" Binding="{Binding ExpiryDate}" Width="120"/>
+                    <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="100"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+    </Grid>
+</UserControl>

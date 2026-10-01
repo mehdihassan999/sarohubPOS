@@ -1,0 +1,311 @@
+<UserControl x:Class="SaroHub.Desktop.Views.DashboardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:cv="clr-namespace:SaroHub.Desktop.Converters"
+             Background="{StaticResource BackgroundBrush}">
+
+    <UserControl.Resources>
+        <cv:BoolToVisibility x:Key="BoolVis"/>
+
+        <!-- Stat Card Style with Top Accent Line -->
+        <Style x:Key="KpiCard" TargetType="Border">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Padding" Value="18 16"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="12" ShadowDepth="2" Opacity="0.04" Color="#000000"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <Grid Margin="24 20 24 24">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>   <!-- Header Banner -->
+                <RowDefinition Height="Auto"/>   <!-- KPI Grid -->
+                <RowDefinition Height="*"/>      <!-- Lower Main Panels -->
+            </Grid.RowDefinitions>
+
+            <!-- ══ HEADER BANNER ═══════════════════════════════════════════ -->
+            <Grid Grid.Row="0" Margin="0 0 0 20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                    <TextBlock Text="Dashboard Overview" Style="{StaticResource H1}"/>
+                    <StackPanel Orientation="Horizontal" Margin="0 4 0 0">
+                        <TextBlock Text="📅  " FontSize="12" Foreground="{StaticResource PrimaryBrush}"/>
+                        <TextBlock Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='dddd, dd MMMM yyyy', Mode=OneTime}"
+                                   xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                                   FontSize="12" Foreground="{StaticResource TextSecondaryBrush}"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Action Controls -->
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Border Background="White" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" CornerRadius="8" Padding="4" Margin="0 0 12 0">
+                        <ComboBox ItemsSource="{Binding Filters}"
+                                  SelectedItem="{Binding Filter}"
+                                  Width="130" Height="32" BorderThickness="0"/>
+                    </Border>
+
+                    <Button Command="{Binding RefreshCommand}" Style="{StaticResource SecondaryButton}" Height="40" Padding="16 0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="↻  " FontSize="13" FontWeight="Bold" Foreground="{StaticResource PrimaryBrush}"/>
+                            <TextBlock Text="Refresh" FontSize="13" FontWeight="SemiBold"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Grid>
+
+            <!-- ══ KPI STAT CARDS GRID ═════════════════════════════════════ -->
+            <UniformGrid Grid.Row="1" Columns="6" Margin="0 0 0 20">
+
+                <!-- 1. Total Sales -->
+                <Border Style="{StaticResource KpiCard}" Margin="0 0 12 0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <DockPanel Grid.Row="0">
+                            <Border DockPanel.Dock="Right" Background="#EFF6FF" CornerRadius="8" Padding="8 6">
+                                <TextBlock Text="💳" FontSize="14"/>
+                            </Border>
+                            <TextBlock Text="Total Sales" Style="{StaticResource Caption}" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                        </DockPanel>
+
+                        <TextBlock Grid.Row="1" Text="{Binding SalesFormatted}" FontSize="20" FontWeight="Bold"
+                                   Foreground="{StaticResource PrimaryBrush}" Margin="0 8 0 4"/>
+
+                        <Border Grid.Row="2" Background="#EFF6FF" CornerRadius="4" Padding="6 2" HorizontalAlignment="Left">
+                            <TextBlock Text="{Binding BillCount, StringFormat='{}{0} bills'}" FontSize="11"
+                                       Foreground="{StaticResource PrimaryBrush}" FontWeight="SemiBold"/>
+                        </Border>
+                    </Grid>
+                </Border>
+
+                <!-- 2. Net Profit -->
+                <Border Style="{StaticResource KpiCard}" Margin="0 0 12 0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <DockPanel Grid.Row="0">
+                            <Border DockPanel.Dock="Right" Background="#ECFDF5" CornerRadius="8" Padding="8 6">
+                                <TextBlock Text="📈" FontSize="14"/>
+                            </Border>
+                            <TextBlock Text="Net Profit" Style="{StaticResource Caption}" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                        </DockPanel>
+
+                        <TextBlock Grid.Row="1" Text="{Binding ProfitFormatted}" FontSize="20" FontWeight="Bold"
+                                   Foreground="{StaticResource SuccessBrush}" Margin="0 8 0 4"/>
+
+                        <Border Grid.Row="2" Background="#ECFDF5" CornerRadius="4" Padding="6 2" HorizontalAlignment="Left">
+                            <TextBlock Text="Net Margin" FontSize="11" Foreground="{StaticResource SuccessBrush}" FontWeight="SemiBold"/>
+                        </Border>
+                    </Grid>
+                </Border>
+
+                <!-- 3. Cash in Hand -->
+                <Border Style="{StaticResource KpiCard}" Margin="0 0 12 0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <DockPanel Grid.Row="0">
+                            <Border DockPanel.Dock="Right" Background="#F1F5F9" CornerRadius="8" Padding="8 6">
+                                <TextBlock Text="💵" FontSize="14"/>
+                            </Border>
+                            <TextBlock Text="Cash in Hand" Style="{StaticResource Caption}" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                        </DockPanel>
+
+                        <TextBlock Grid.Row="1" Text="{Binding CashFormatted}" FontSize="20" FontWeight="Bold"
+                                   Foreground="{StaticResource TextPrimaryBrush}" Margin="0 8 0 4"/>
+
+                        <TextBlock Grid.Row="2" Text="In Till Drawer" Style="{StaticResource Caption}"/>
+                    </Grid>
+                </Border>
+
+                <!-- 4. Khata (Receivables) -->
+                <Border Style="{StaticResource KpiCard}" Margin="0 0 12 0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <DockPanel Grid.Row="0">
+                            <Border DockPanel.Dock="Right" Background="#FEF3C7" CornerRadius="8" Padding="8 6">
+                                <TextBlock Text="🤝" FontSize="14"/>
+                            </Border>
+                            <TextBlock Text="Khata" Style="{StaticResource Caption}" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                        </DockPanel>
+
+                        <TextBlock Grid.Row="1" Text="{Binding KhataFormatted}" FontSize="20" FontWeight="Bold"
+                                   Foreground="{StaticResource AccentBrush}" Margin="0 8 0 4"/>
+
+                        <Border Grid.Row="2" Background="#FEF3C7" CornerRadius="4" Padding="6 2" HorizontalAlignment="Left">
+                            <TextBlock Text="To Receive" FontSize="11" Foreground="#D97706" FontWeight="SemiBold"/>
+                        </Border>
+                    </Grid>
+                </Border>
+
+                <!-- 5. Expenses -->
+                <Border Style="{StaticResource KpiCard}" Margin="0 0 12 0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <DockPanel Grid.Row="0">
+                            <Border DockPanel.Dock="Right" Background="#FEF2F2" CornerRadius="8" Padding="8 6">
+                                <TextBlock Text="💸" FontSize="14"/>
+                            </Border>
+                            <TextBlock Text="Expenses" Style="{StaticResource Caption}" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                        </DockPanel>
+
+                        <TextBlock Grid.Row="1" Text="{Binding ExpensesFormatted}" FontSize="20" FontWeight="Bold"
+                                   Foreground="{StaticResource DangerBrush}" Margin="0 8 0 4"/>
+
+                        <TextBlock Grid.Row="2" Text="Total Outflow" Style="{StaticResource Caption}"/>
+                    </Grid>
+                </Border>
+
+                <!-- 6. Payables -->
+                <Border Style="{StaticResource KpiCard}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <DockPanel Grid.Row="0">
+                            <Border DockPanel.Dock="Right" Background="#F1F5F9" CornerRadius="8" Padding="8 6">
+                                <TextBlock Text="🏭" FontSize="14"/>
+                            </Border>
+                            <TextBlock Text="Payable" Style="{StaticResource Caption}" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                        </DockPanel>
+
+                        <TextBlock Grid.Row="1" Text="{Binding PayableFormatted}" FontSize="20" FontWeight="Bold"
+                                   Foreground="{StaticResource TextSecondaryBrush}" Margin="0 8 0 4"/>
+
+                        <TextBlock Grid.Row="2" Text="To Suppliers" Style="{StaticResource Caption}"/>
+                    </Grid>
+                </Border>
+
+            </UniformGrid>
+
+            <!-- ══ MAIN PANELS ═════════════════════════════════════════════ -->
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="320"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Left Column: Recent Sales & Low Stock -->
+                <StackPanel Grid.Column="0">
+
+                    <!-- Recent Sales Panel -->
+                    <Border Style="{StaticResource Card}" Padding="0" Margin="0 0 0 20">
+                        <DockPanel>
+                            <Border DockPanel.Dock="Top" Padding="20 16" BorderBrush="{StaticResource BorderBrush}" BorderThickness="0 0 0 1">
+                                <DockPanel>
+                                    <TextBlock Text="🧾  Recent Transactions" Style="{StaticResource H3}"/>
+                                </DockPanel>
+                            </Border>
+
+                            <DataGrid ItemsSource="{Binding RecentSales}" Margin="0" MinHeight="180">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="INVOICE #"  Binding="{Binding InvoiceNo}" Width="120"/>
+                                    <DataGridTextColumn Header="CUSTOMER"   Binding="{Binding Customer}" Width="*"/>
+                                    <DataGridTextColumn Header="TIME"       Binding="{Binding AtLocal, StringFormat='HH:mm'}" Width="80"/>
+                                    <DataGridTextColumn Header="TOTAL"      Binding="{Binding TotalPaisa, Converter={x:Static cv:MoneyConverter.Instance}}" Width="120"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </DockPanel>
+                    </Border>
+
+                    <!-- Low Stock Alerts Panel -->
+                    <Border Style="{StaticResource Card}" Padding="0">
+                        <DockPanel>
+                            <Border DockPanel.Dock="Top" Padding="20 16" BorderBrush="{StaticResource BorderBrush}" BorderThickness="0 0 0 1">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="⚠️  " FontSize="15" Foreground="{StaticResource WarningBrush}"/>
+                                    <TextBlock Text="Low Stock Warnings" Style="{StaticResource H3}" Foreground="{StaticResource TextPrimaryBrush}"/>
+                                </StackPanel>
+                            </Border>
+
+                            <DataGrid ItemsSource="{Binding LowStock}" Margin="0" MinHeight="180">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="PRODUCT NAME" Binding="{Binding Name}" Width="*"/>
+                                    <DataGridTextColumn Header="CURRENT STOCK" Binding="{Binding StockQtyRaw, Converter={x:Static cv:QtyConverter.Instance}}" Width="120"/>
+                                    <DataGridTextColumn Header="MIN ALERT"     Binding="{Binding MinStockQtyRaw, Converter={x:Static cv:QtyConverter.Instance}}" Width="100"/>
+                                    <DataGridTextColumn Header="UNIT"          Binding="{Binding UnitSymbol}" Width="80"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </DockPanel>
+                    </Border>
+                </StackPanel>
+
+                <!-- Right Column: To Receive (Khata Customers) -->
+                <Border Grid.Column="2" Style="{StaticResource Card}" Padding="0" VerticalAlignment="Top">
+                    <DockPanel>
+                        <Border DockPanel.Dock="Top" Padding="20 16" BorderBrush="{StaticResource BorderBrush}" BorderThickness="0 0 0 1">
+                            <DockPanel>
+                                <TextBlock Text="🤝  Khata Receivables" Style="{StaticResource H3}"/>
+                            </DockPanel>
+                        </Border>
+
+                        <ItemsControl ItemsSource="{Binding WhoOwe}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="{StaticResource BorderBrush}" BorderThickness="0 0 0 1" Padding="16 12">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <!-- Avatar initial bubble -->
+                                            <Border Grid.Column="0" Width="36" Height="36" Background="#EFF6FF" CornerRadius="18" Margin="0 0 12 0">
+                                                <TextBlock Text="👤" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" Foreground="{StaticResource PrimaryBrush}"/>
+                                            </Border>
+
+                                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                                <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="13" Foreground="{StaticResource TextPrimaryBrush}"/>
+                                                <TextBlock Text="{Binding Phone}" Style="{StaticResource Caption}" Margin="0 2 0 0"/>
+                                            </StackPanel>
+
+                                            <Border Grid.Column="2" Background="#FEF3C7" CornerRadius="6" Padding="10 4" VerticalAlignment="Center">
+                                                <TextBlock Text="{Binding BalancePaisa, Converter={x:Static cv:MoneyConverter.Instance}}"
+                                                           FontWeight="Bold" FontSize="12" Foreground="#D97706"/>
+                                            </Border>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </DockPanel>
+                </Border>
+
+            </Grid>
+
+        </Grid>
+    </ScrollViewer>
+
+</UserControl>

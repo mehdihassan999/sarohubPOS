@@ -1,0 +1,186 @@
+<Window x:Class="SaroHub.Desktop.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:cv="clr-namespace:SaroHub.Desktop.Converters"
+        Title="{Binding ShopName, StringFormat='{}{0} — SaroHub POS'}"
+        Icon="pack://application:,,,/Resources/app.ico"
+        MinWidth="1100" MinHeight="660"
+        Width="1280" Height="760"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource BackgroundBrush}">
+
+    <Window.Resources>
+        <cv:BoolToVisibility x:Key="BoolVis"/>
+
+        <Style x:Key="WindowCtrlBtn" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="bd" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="#E2E8F0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="WindowCloseBtn" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="bd" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="#EF4444"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- ═══ SIDEBAR ═══════════════════════════════════════════════════ -->
+        <Border Grid.Column="0" Background="{StaticResource SidebarBrush}">
+            <DockPanel>
+
+                <!-- Brand -->
+                <Border DockPanel.Dock="Top" Padding="20 20 20 14">
+                    <StackPanel>
+                        <TextBlock Text="SaroHub POS"
+                                   Foreground="White" FontSize="18" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding ShopName}" FontSize="12" Margin="0 2 0 0"
+                                   Foreground="{StaticResource SidebarTextBrush}"/>
+                    </StackPanel>
+                </Border>
+
+                <Separator DockPanel.Dock="Top" Background="#334155" Height="1" Margin="16 0"/>
+
+                <!-- User -->
+                <Border DockPanel.Dock="Top" Padding="20 12 20 12">
+                    <TextBlock Text="{Binding UserName, StringFormat='👤 {0}'}"
+                               Foreground="{StaticResource SidebarTextBrush}" FontSize="13" FontWeight="Medium"/>
+                </Border>
+
+                <Separator DockPanel.Dock="Top" Background="#334155" Height="1" Margin="16 0 16 8"/>
+
+                <!-- Day Close at bottom -->
+                <Border DockPanel.Dock="Bottom" Padding="12 12">
+                    <Button Content="⊗  Close Day" Command="{Binding DayCloseCommand}"
+                            Style="{StaticResource NavItem}"
+                            Foreground="{StaticResource AccentBrush}" FontWeight="SemiBold"/>
+                </Border>
+
+                <Separator DockPanel.Dock="Bottom" Background="#334155" Height="1" Margin="16 0"/>
+
+                <!-- Main nav -->
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Margin="0 4 0 0">
+
+                        <Button Content="⊞  Dashboard" Command="{Binding NavDashboardCommand}" Tag="{Binding IsDashboard}" Style="{StaticResource NavItem}"/>
+
+                        <!-- NEW SALE — prominent accent -->
+                        <Button Margin="10 10 10 10" Height="44"
+                                Command="{Binding NavPosCommand}"
+                                Background="{StaticResource AccentBrush}"
+                                Foreground="White"
+                                FontWeight="Bold" FontSize="14"
+                                BorderThickness="0" Cursor="Hand">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}" CornerRadius="10"
+                                            Padding="0 0">
+                                        <TextBlock Text="＋  New Sale" HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center" FontWeight="Bold"
+                                                   FontSize="14" Foreground="{TemplateBinding Foreground}"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#D97706"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+
+                        <Button Content="⊙  Khata"      Command="{Binding NavKhataCommand}"      Tag="{Binding IsKhata}"      Style="{StaticResource NavItem}"/>
+                        <Button Content="⊡  Products"   Command="{Binding NavProductsCommand}"   Tag="{Binding IsProducts}"   Style="{StaticResource NavItem}"/>
+                        <Button Content="⊠  Stock"      Command="{Binding NavStockCommand}"      Tag="{Binding IsStock}"      Style="{StaticResource NavItem}"/>
+                        <Button Content="↓  Purchases"  Command="{Binding NavPurchasesCommand}"  Tag="{Binding IsPurchases}"  Style="{StaticResource NavItem}"/>
+                        <Button Content="☻  Customers"  Command="{Binding NavCustomersCommand}"  Tag="{Binding IsCustomers}"  Style="{StaticResource NavItem}"/>
+                        <Button Content="⊜  Suppliers"  Command="{Binding NavSuppliersCommand}"  Tag="{Binding IsSuppliers}"  Style="{StaticResource NavItem}"/>
+                        <Button Content="₨  Expenses"   Command="{Binding NavExpensesCommand}"   Tag="{Binding IsExpenses}"   Style="{StaticResource NavItem}"/>
+                        <Button Content="↗  Reports"    Command="{Binding NavReportsCommand}"    Tag="{Binding IsReports}"    Style="{StaticResource NavItem}"/>
+                        <Button Content="⚖  Accounting" Command="{Binding NavAccountingCommand}" Tag="{Binding IsAccounting}" Style="{StaticResource NavItem}"/>
+                        <Button Content="🛡  Warranty"   Command="{Binding NavWarrantyCommand}"   Tag="{Binding IsWarranty}"   Style="{StaticResource NavItem}"/>
+                        <Button Content="📋  Quotations" Command="{Binding NavQuotationsCommand}" Tag="{Binding IsQuotations}" Style="{StaticResource NavItem}"/>
+
+                        <Separator Background="#334155" Height="1" Margin="16 8"/>
+
+                        <Button Content="⊙  Users"      Command="{Binding NavUsersCommand}"      Tag="{Binding IsUsers}"      Style="{StaticResource NavItem}"/>
+                        <Button Content="⊗  Backup"     Command="{Binding NavBackupCommand}"     Tag="{Binding IsBackup}"     Style="{StaticResource NavItem}"/>
+                        <Button Content="⊕  Settings"   Command="{Binding NavSettingsCommand}"   Tag="{Binding IsSettings}"   Style="{StaticResource NavItem}"/>
+
+                    </StackPanel>
+                </ScrollViewer>
+
+            </DockPanel>
+        </Border>
+
+        <!-- ═══ MAIN CONTENT AREA ═════════════════════════════════════════ -->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="38"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Top Header & Window Controls -->
+            <Border Grid.Row="0" Background="White" BorderBrush="{StaticResource BorderBrush}" BorderThickness="0 0 0 1">
+                <DockPanel>
+                    <!-- Window Controls (Minimize, Maximize, Close) -->
+                    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                        <Button Click="MinimizeBtn_Click" Width="44" Style="{StaticResource WindowCtrlBtn}" ToolTip="Minimize">
+                            <TextBlock Text="─" FontSize="11" Foreground="#64748B"/>
+                        </Button>
+                        <Button Click="MaximizeBtn_Click" Width="44" Style="{StaticResource WindowCtrlBtn}" ToolTip="Maximize / Restore">
+                            <TextBlock Text="□" FontSize="12" Foreground="#64748B"/>
+                        </Button>
+                        <Button Click="CloseBtn_Click" Width="44" Style="{StaticResource WindowCloseBtn}" ToolTip="Close">
+                            <TextBlock Text="✕" FontSize="12" Foreground="#64748B"/>
+                        </Button>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="16 0 0 0">
+                        <TextBlock Text="SaroHub POS" FontSize="12" FontWeight="Bold" Foreground="{StaticResource PrimaryBrush}"/>
+                        <TextBlock Text="  •  " FontSize="12" Foreground="{StaticResource TextMutedBrush}"/>
+                        <TextBlock Text="{Binding ShopName}" FontSize="12" Foreground="{StaticResource TextSecondaryBrush}"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <!-- Main View Container -->
+            <ContentPresenter Grid.Row="1" Content="{Binding CurrentView}"/>
+        </Grid>
+
+    </Grid>
+</Window>

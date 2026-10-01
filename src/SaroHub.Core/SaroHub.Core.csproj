@@ -1,0 +1,12 @@
+<!-- src/SaroHub.Core/SaroHub.Core.csproj -->
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SaroHub.Domain\SaroHub.Domain.csproj" />
+  </ItemGroup>
+</Project>
